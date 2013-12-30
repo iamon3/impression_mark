@@ -3,8 +3,8 @@ impression_mark web service
 
 This service is tested on Mac OS X 10.7.3, installed with git version 1.7.7.5 (Apple Git-26), and Apache Maven 3.0.4
 
-Pre requisite to run the project :
------------------------------------
+Pre requisite for running the service :
+---------------------------------------
 1) A system should have a stable internet connection
 
 2) git should be installed on your system. If it's not installed, 
