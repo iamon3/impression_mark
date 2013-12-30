@@ -7,7 +7,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.WebApplicationException;
 
-import com.com.persistence.service.DocumentService;
+import com.persistence.service.DocumentService;
 import com.persistence.beans.Document;
 
 
