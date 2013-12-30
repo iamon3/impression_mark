@@ -1,59 +1,110 @@
 package com.resource;
 
-import static com.util.PathConstants.DOCUMENT_BASE_PATH;
+import static com.util.PathConstants.SERVICE_PATH;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.xml.bind.JAXBElement;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.WebApplicationException;
 
-import com.beans.Document;
+import com.com.persistence.service.DocumentService;
+import com.persistence.beans.Document;
 
 
 /**
+ * This class exposes CRUD operations on document(s) resources.
  */
-@Path(DOCUMENT_BASE_PATH)
+@Path(SERVICE_PATH)
 public class DocumentResource {
 
-    //private static final String DOCUMENT_BASE_PATH = "/documents";
-    private static final String DOCUMENT_RELATIVE_PATH = "/{ticketId}";
+    private static final String DOCUMENTS_RESOURCE_PATH = "/documents";
+    private static final String DOCUMENT_RESOURCE_PATH = "/{documentId}";
 
+    /**
+     * curl -X POST http://127.0.0.1:9090/impression-mark/services/documents
+     */
     @POST
-    @Path("/post")
+    @Path(DOCUMENTS_RESOURCE_PATH)
     @Consumes({ MediaType.APPLICATION_XML, MediaType.TEXT_XML, MediaType.APPLICATION_JSON })
-    @Produces({ MediaType.TEXT_PLAIN,  MediaType.APPLICATION_XML, MediaType.TEXT_XML, MediaType.APPLICATION_JSON })
-    public String addDocument(JAXBElement<Document> document)
+    @Produces({ MediaType.APPLICATION_XML, MediaType.TEXT_XML, MediaType.APPLICATION_JSON })
+    public Document addDocument(Document document)
     {
-        System.out.println("POST : " + document.getValue());
-        return "\n POST \n";
+        Document  documentAdded = new Document();
+        documentAdded = getDocumentService().addDocument(document);
+        if(null == documentAdded){
+            throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+        }
+        return documentAdded;
     }
 
+    /**
+     * curl -X GET http://127.0.0.1:9090/impression-mark/services/documents/{documentId}
+     */
     @GET
-    @Path(DOCUMENT_RELATIVE_PATH)
-    //@Consumes({ MediaType.APPLICATION_XML, MediaType.TEXT_XML, MediaType.APPLICATION_JSON })
-    @Produces({ MediaType.TEXT_PLAIN,  MediaType.APPLICATION_XML, MediaType.TEXT_XML, MediaType.APPLICATION_JSON })
-    public String getDocument(@PathParam("ticketId") String ticketId)
+    @Path(DOCUMENTS_RESOURCE_PATH + DOCUMENT_RESOURCE_PATH)
+    @Produces({ MediaType.APPLICATION_XML, MediaType.TEXT_XML, MediaType.APPLICATION_JSON })
+    public Document getDocument(@PathParam("documentId") String documentId)
     {
-        System.out.println("GET : " + ticketId);
-        return "\n GET \n";
+        Document document = new Document();
+        try{
+            document = getDocumentService().getDocument(documentId);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+        }
+        if(null == document){
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+        return document;
     }
 
+    /**
+     * curl -X PUT http://127.0.0.1:9090/impression-mark/services/documents/{documentId}
+     */
     @PUT
-    @Path(DOCUMENT_RELATIVE_PATH)
+    @Path(DOCUMENTS_RESOURCE_PATH + DOCUMENT_RESOURCE_PATH)
     @Consumes({ MediaType.APPLICATION_XML, MediaType.TEXT_XML, MediaType.APPLICATION_JSON })
-    @Produces({ MediaType.TEXT_PLAIN, MediaType.APPLICATION_XML, MediaType.TEXT_XML, MediaType.APPLICATION_JSON })
-    public String updateDocument(@PathParam("ticketId") String ticketId, Document document)
+    @Produces({ MediaType.APPLICATION_XML, MediaType.TEXT_XML, MediaType.APPLICATION_JSON })
+    public Document updateDocument(@PathParam("documentId") String documentId, Document document)
     {
-        System.out.println("PUT tId : " + ticketId + ", document => " + document);
-        return "\n PUT \n";
+        Document documentUpdated = new Document();
+        try{
+        documentUpdated = getDocumentService().updateDocument(documentId, document);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+        }
+        if(null == documentUpdated){
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+        return documentUpdated;
     }
 
+    /**
+     * curl -X DELETE http://127.0.0.1:9090/impression-mark/services/documents/{documentId}
+     */
     @DELETE
-    @Path(DOCUMENT_RELATIVE_PATH)
-    //@Consumes({ MediaType.APPLICATION_XML, MediaType.TEXT_XML, MediaType.APPLICATION_JSON })
+    @Path(DOCUMENTS_RESOURCE_PATH + DOCUMENT_RESOURCE_PATH)
     @Produces({ MediaType.TEXT_PLAIN, MediaType.APPLICATION_XML, MediaType.TEXT_XML, MediaType.APPLICATION_JSON })
-    public String deleteDocument(@PathParam("ticketId") String ticketId)
+    public Document deleteDocument(@PathParam("documentId") String documentId)
     {
-        System.out.println("DELETE : " + ticketId);
-        return "\n DELETE \n";
+        Document documentDeleted = new Document();
+        try{
+        documentDeleted = getDocumentService().deleteDocument(documentId);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+        }
+        if(null == documentDeleted){
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+        return documentDeleted;
+    }
+
+    private DocumentService getDocumentService(){
+        return new DocumentService();
     }
 }

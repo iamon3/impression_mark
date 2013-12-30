@@ -31,6 +31,13 @@ It's a RESTful web service developed using Jersey framework. To run the project,
        sudo mvn clean; sudo mvn package; sudo mvn jetty:run
      
 This step will take some time and will download all the required dependencies fot the module. Once the donwloading 
-and packaging step is done, jetty server will be booted showing the messgae jetty server is running on port 9090.
-     
+and packaging step is done, jetty server will be booted showing the messgae jetty server is running on port 9090. You will see the following log statement on the terminal.
+
+	INFO::Started SelectChannelConnector@0.0.0.0:9090
+	[INFO] Started Jetty Server     
+
 Here your are done! Your web service is up and running to server the resource request.
+
+  3) To stop the server on Linux/Mac
+
+     	Ctrl+C
