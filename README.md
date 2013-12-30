@@ -42,6 +42,67 @@ Here your are done! Your web service is up and running to server the resource re
 
      	Ctrl+C
 
+Testing the service
+-------------------
+
+We can use any client for testing e.g. curl, Google chrome browser extensions viz Dev HTTP clinet, REST console, POSTMAN
+
+I used curl for testing. Following  are examples of service calls and their responses.
+
+1) POST
+
+curl -i -X POST -H "Content-Type:application/json" -H "Accept:application/json" -d  '{"content":"book", "author":"chetan bhagat", "title":"5 point someone","topic":"story"}' http://localhost:9090/impression-mark/services/documents
+
+Response
+HTTP/1.1 200 OK
+Content-Type: application/json
+Transfer-Encoding: chunked
+Server: Jetty(6.1.22)
+
+{"documentId":"1","content":"book","title":"5 point someone","author":"chetan bhagat","topic":"story","isMarked":"true"}
+
+
+2) GET
+
+curl -i -X GET -H "Accept:application/json" http://localhost:9090/impression-mark/services/documents/1
+
+Response
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+Transfer-Encoding: chunked
+Server: Jetty(6.1.22)
+
+{"documentId":"1","content":"book","title":"5 point someone","author":"chetan bhagat","topic":"story","isMarked":"true"}
+
+
+3) PUT
+
+curl -i -X PUT -H "Content-Type:application/json" -H "Accept:application/json" -d  '{"author":"CHETAN BHAGAT"}' http://localhost:9090/impression-mark/services/documents/1
+
+Response
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+Transfer-Encoding: chunked
+Server: Jetty(6.1.22)
+
+{"documentId":"1","content":"book","title":"5 point someone","author":"CHETAN BHAGAT","topic":"story","isMarked":"true"}
+
+4) Delete 
+
+curl -i -X DELETE -H "Accept:application/json" http://localhost:9090/impression-mark/services/documents/1
+
+Response
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+Transfer-Encoding: chunked
+Server: Jetty(6.1.22)
+
+{"documentId":"1","content":"book","title":"5 point someone","author":"CHETAN BHAGAT","topic":"story","isMarked":"true"}
+
+
 For any assistance please reach out to me at
 -------------------------------------------
 	iamon3.free@gmail.com
