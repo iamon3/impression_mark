@@ -41,3 +41,7 @@ Here your are done! Your web service is up and running to server the resource re
   3) To stop the server on Linux/Mac
 
      	Ctrl+C
+
+For any assistance please reach out to me at
+-------------------------------------------
+	iamon3.free@gmail.com
