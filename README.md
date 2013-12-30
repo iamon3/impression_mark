@@ -7,19 +7,19 @@ Pre requisite for running the service :
 ---------------------------------------
 1) A system should have a stable internet connection
 
-2) git should be installed on your system. If it's not installed, 
+2) git should be installed on your system. If it's not installed, refer :
 
-    refer : https://help.github.com/articles/set-up-git
+    https://help.github.com/articles/set-up-git
 
 You should have a read access to clone the public repository from github.
 
-3) Apache maven should be installed on your system. If it's not installed, 
+3) Apache maven should be installed on your system. If it's not installed, refer : 
 
-     refer : http://maven.apache.org/download.cgi
+     http://maven.apache.org/download.cgi
      
-4) This is optional. A client is needed to test the service. curl is simple comand line client. If it's not installed
+4) This is optional. A client is needed to test the service. curl is simple comand line client. If it's not installed, refer:
 
-     refer http://curl.haxx.se/docs/install.html
+     http://curl.haxx.se/docs/install.html
 
 
 Setting up the project a.k.a service
