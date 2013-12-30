@@ -16,6 +16,10 @@ You should have a read access to clone the public repository from github.
 3) Apache maven should be installed on your system. If it's not installed, 
 
      refer : http://maven.apache.org/download.cgi
+     
+4) This is optional. A client is needed to test the service. curl is simple comand line client. If it's not installed
+
+     refer http://curl.haxx.se/docs/install.html
 
 
 Setting up the project a.k.a service
