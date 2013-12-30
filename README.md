@@ -28,7 +28,7 @@ It's a RESTful web service developed using Jersey framework. To run the project,
 
   1) First clone the repository in your local system
     
-       git clone -b https://github.com/iamon3/impression_mark.git
+       git clone https://github.com/iamon3/impression_mark.git
    
   2) Run the following command
      
